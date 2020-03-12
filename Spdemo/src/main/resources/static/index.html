@@ -1,0 +1,36 @@
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse:collapse;
+}
+th, td {
+  padding: 5px;
+}
+</style>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+	var txt = "";
+  if (this.readyState == 4 && this.status == 200) {
+    var myObj = JSON.parse(this.responseText);
+    console.log(myObj);
+    txt += "<table border='1'>"
+    txt += "<tr><th>ID</th><th>Name</th>";
+    for (x in myObj) {
+    	txt += "<tr><td>" + myObj[x].id + "</td><td>" + myObj[x].name + "</td></tr>";
+      }
+    txt += "</table>" 
+    document.getElementById("demo").innerHTML = txt;
+      }
+}
+xmlhttp.open("GET", "http://localhost:1810/get", true);
+xmlhttp.send();
+
+    </script>
+</head>
+<body id="demo">
+</body>
+</html>
